@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="#{login.page.title}">Title</title>
+</head>
+<body>
+<h1 th:text="#{login.page.body}">Body Title</h1>
+	<form action="#" th:object="${user}" th:action="@{/user/validate}" method="get">
+		<input type="hidden" th:field="*{userId}">
+		<fieldset>
+		User Name <input type="text" th:field="*{userName}">
+		<p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
+		</fieldset>
+		<fieldset>
+		Password <input type="password" th:field="*{password}">
+		<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+		</fieldset>
+		<fieldset>
+			<button type="submit" th:text="#{login.page.button}">Save</button>
+			<button type="reset">Reset</button>
+		</fieldset>
+			
+	</form>
+</body>
+</html>

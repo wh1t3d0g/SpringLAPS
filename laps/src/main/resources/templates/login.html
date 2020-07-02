@@ -5,9 +5,10 @@
 <title th:text="#{login.page.title}">Title</title>
 </head>
 <body>
+<h2 th:text="${session.display}">Session Data</h2>
+
 <h1 th:text="#{login.page.body}">Body Title</h1>
-	<form action="#" th:object="${user}" th:action="@{/user/validate}" method="get">
-		<input type="hidden" th:field="*{userId}">
+	<form action="#" th:object="${user}" th:action="@{/user/validate}" method="post">
 		<fieldset>
 		User Name <input type="text" th:field="*{userName}">
 		<p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>

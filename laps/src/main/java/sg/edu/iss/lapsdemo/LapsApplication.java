@@ -10,7 +10,7 @@ import sg.edu.iss.lapsdemo.model.User;
 
 @SpringBootApplication
 public class LapsApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(LapsApplication.class, args);
 	}
@@ -20,6 +20,7 @@ public class LapsApplication {
 	return args ->{
 			User u1=new User(1,"Apple","tree");
 			System.out.println(u1.toString());
+			
 	};
 	}
 

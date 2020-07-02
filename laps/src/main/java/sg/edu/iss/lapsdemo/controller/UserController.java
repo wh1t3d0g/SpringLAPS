@@ -1,7 +1,5 @@
 package sg.edu.iss.lapsdemo.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,9 +11,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import sg.edu.iss.lapsdemo.model.User;
 import sg.edu.iss.lapsdemo.service.UserService;
@@ -45,23 +44,24 @@ public class UserController {
 		return "login";
 	}
 	
-	@GetMapping(value="/validate")
+	@PostMapping(value="/validate")
 	public String validate(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
 			Model model, HttpSession session) {
-//		if(bindingResult.hasErrors()||user==null) {
-//			return "login";
-//		} 
-//			User registeredUser=uservice.findUserByName(user.getUserName());
-//			if(!registeredUser.getPassword().equals(user.getPassword())) {
-//				return "login";
-//			}
-//			session.setAttribute("display",user.getUserName());
+		if(bindingResult.hasErrors()||user==null) {
+			return "login";
+		} 
+			User registeredUser=uservice.findUserByName(user.getUserName());
+			if(!registeredUser.getPassword().equals(user.getPassword())) {
+				return "login";
+			}
+			model.addAttribute("user",user);
+			session.setAttribute("display",user.getUserName());
 			return "success";			
 	}
 	
 	@GetMapping("/logout")
-	public String logout(@ModelAttribute("user") User user, Model model, HttpSession session) {
-		session.setAttribute("display",null);
+	public String logout(@ModelAttribute("user") User user, Model model, SessionStatus status) {
+		status.setComplete();
 		return "forward:/user/login";
 	}	
 }

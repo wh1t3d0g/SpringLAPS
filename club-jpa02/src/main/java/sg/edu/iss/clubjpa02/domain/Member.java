@@ -12,6 +12,13 @@ public class Member {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public Member(String name, String password) {
+		super();
+		this.name = name;
+		this.password = password;
+	}
+	
 	public Member(int memberId, String name, String password) {
 		super();
 		this.memberId = memberId;
@@ -40,6 +47,7 @@ public class Member {
 	public String toString() {
 		return "Member [memberId=" + memberId + ", name=" + name + ", password=" + password + "]";
 	}
-	
 
+
+	
 }
